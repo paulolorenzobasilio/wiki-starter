@@ -18,9 +18,11 @@ npm run serve
 ### Tech
 * Will you use a framework?  Vue, React, Vanilla, or anything you like, the world is your oyster
 * How will users enter data?  Textarea elements aren't very user-friendly for long text, what could you use instead?
+* Do you want to add a backend? How will that play alongside esbuild?
 
 ### Considerations
 * Will titles have to match urls?
 * How you will you deal with name collisions?
 * Will you have validation?
 * How will you manage application state?
+* Will you have edit histories?  Any authorisation or authentication?
