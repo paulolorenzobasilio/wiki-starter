@@ -1,8 +1,10 @@
-const fragment = document.createDocumentFragment();
-const li = fragment
-    .appendChild(document.createElement("section"))
-    .appendChild(document.createElement("ul"))
-    .appendChild(document.createElement("li"));
-li.textContent = "hello world";
+import React from 'react';
+import ReactDOM from 'react-dom'
 
-document.body.appendChild(fragment);
+function App(){
+    return (
+        <div>Hello</div>
+    );
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'))
