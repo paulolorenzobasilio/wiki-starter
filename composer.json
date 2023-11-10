@@ -20,7 +20,8 @@
         "uma/dic": "^3.0",
         "robmorgan/phinx": "^0.15.3",
         "fakerphp/faker": "^1.23",
-        "cocur/slugify": "^4.5"
+        "cocur/slugify": "^4.5",
+        "php-di/slim-bridge": "^3.4"
     },
     "config": {
         "platform": {

@@ -1,16 +1,22 @@
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
+
+use App\Controller\WikiController;
+use DI\Bridge\Slim\Bridge;
+use Doctrine\ORM\EntityManager;
 
 require __DIR__ .'/../vendor/autoload.php';
+$cnt = require __DIR__ . '/../bootstrap.php';
 
-$app = AppFactory::create();
+$definitions = [
+    WikiController::class => DI\create()->constructor($cnt->get(EntityManager::class))
+];
+$builder = new DI\ContainerBuilder();
+$builder->addDefinitions($definitions);
+$container = $builder->build();
 
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
-});
+$app = Bridge::create($container);
+
+$app->get('/', WikiController::class . ':get');
 
 $app->run();
 
