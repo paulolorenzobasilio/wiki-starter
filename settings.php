@@ -15,7 +15,7 @@ return [
             'metadata_dirs' => [APP_ROOT . '/src/Entity'],
             'connection' => [
                 'driver' => 'pdo_sqlite',
-                'path' => 'database.sqlite'
+                'path' => __DIR__ .  '/db/database.sqlite'
             ]
         ]
     ]
