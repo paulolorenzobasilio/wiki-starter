@@ -1,0 +1,27 @@
+{
+    "name": "itcentral/wiki-starter",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paulo Basilio",
+            "email": "paulo.basilio@lamudi.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "slim/psr7": "^1.6",
+        "slim/slim": "4.*",
+        "doctrine/orm": "^2.16",
+        "symfony/cache": "^6.3",
+        "uma/dic": "^3.0"
+    },
+    "config": {
+        "platform": {
+            "php": "8.1.22"
+        }
+    }
+}
