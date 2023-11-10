@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Entity;
+
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -22,10 +24,10 @@ final class Wiki
     private string $url;
 
     #[Column(type: 'datetime_immutable', nullable: false, options: ["default" => "CURRENT_TIMESTAMP"])]
-    private DateTimeImmutable $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     #[Column(type: 'datetime_immutable', nullable: false, options: ["default" => "CURRENT_TIMESTAMP"])]
-    private DateTimeImmutable $updatedAt;
+    private \DateTimeImmutable $updatedAt;
 
     public function getId(): int
     {
@@ -67,7 +69,7 @@ final class Wiki
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -77,7 +79,7 @@ final class Wiki
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
