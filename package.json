@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "serve": "esbuild app.js --outdir=www/js --bundle --servedir=www --serve=9009 --serve-fallback=www/index.html --loader:.js=jsx"
+    "serve": "esbuild www/app.js --outdir=www/js --bundle --servedir=www --serve=9009 --serve-fallback=www/index.html --loader:.js=jsx"
   },
   "devDependencies": {
     "esbuild": "0.19.5"
