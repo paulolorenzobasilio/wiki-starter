@@ -14,14 +14,14 @@ function App(){
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        formData.description = editor.getText()
+        formData.description = editor.root.innerHTML
         try {
             const bodyFormData = new FormData();
             bodyFormData.append('title', formData.title)
             bodyFormData.append('description', formData.description)
             const response = await axios({
                 method: 'post',
-                url: 'https://127.0.0.1:8000',
+                url: 'http://localhost:8000',
                 data: bodyFormData,
                 headers: {
                     'Content-Type': `multipart/form-data`
