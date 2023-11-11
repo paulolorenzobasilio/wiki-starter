@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use Ramsey\Uuid\Uuid;
 
 #[Entity, Table(name: 'wiki')]
 final class Wiki
@@ -14,10 +16,10 @@ final class Wiki
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
-    #[Column(type: 'string', nullable: false)]
+    #[Column(type: 'string', length: 75, nullable: false)]
     private string $title;
 
-    #[Column(type: 'string', nullable: false)]
+    #[Column(type: 'text', nullable: false)]
     private string $description;
 
     #[Column(type: 'string', unique: true)]
@@ -67,7 +69,9 @@ final class Wiki
 
     public function setUrl(string $url): void
     {
-        $this->url = $url;
+        $uniqUrl = sprintf("$url-%s", Uuid::uuid4()->toString());
+
+        $this->url = (new Slugify())->slugify($uniqUrl);
     }
 
     public function getCreatedAt(): \DateTimeImmutable

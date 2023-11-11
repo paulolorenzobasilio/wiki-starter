@@ -23,7 +23,10 @@
         "cocur/slugify": "^4.5",
         "php-di/slim-bridge": "^3.4",
         "symfony/serializer": "^6.3",
-        "symfony/property-access": "^6.3"
+        "symfony/property-access": "^6.3",
+        "zeuxisoo/slim-whoops": "^0.7.3",
+        "ramsey/uuid": "^4.7",
+        "rakit/validation": "^1.4"
     },
     "config": {
         "platform": {

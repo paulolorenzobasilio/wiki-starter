@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
-use Doctrine\ORM\EntityManager;
+use App\Entity\Wiki;
+use Doctrine\ORM\EntityManager;;
+
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\Serializer;
 
@@ -21,5 +26,25 @@ class WikiController
 
         return $response
             ->withHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    public function post(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $body = $request->getParsedBody();
+
+        $wiki = new Wiki();
+        $wiki->setTitle($body['title']);
+        $wiki->setDescription($body['description']);
+        $wiki->setUrl($body['title']);
+
+        $this->em->persist($wiki);
+        $this->em->flush();
+
+        return $response->withStatus(201, 'Created')
+            ->withHeader('Content-type', 'application/json');
     }
 }
