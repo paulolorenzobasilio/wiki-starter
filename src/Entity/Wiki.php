@@ -14,20 +14,26 @@ final class Wiki
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
-    #[Column(type: 'string', unique: true, nullable: false)]
+    #[Column(type: 'string', nullable: false)]
     private string $title;
 
-    #[Column(type: 'string', unique: true, nullable: false)]
+    #[Column(type: 'string', nullable: false)]
     private string $description;
 
-    #[Column(type: 'string')]
+    #[Column(type: 'string', unique: true)]
     private string $url;
 
-    #[Column(type: 'datetime_immutable', nullable: false, options: ["default" => "CURRENT_TIMESTAMP"])]
-    private \DateTimeImmutable $createdAt;
+    #[Column(type: 'datetime_immutable', nullable: true, options: ["default" => "CURRENT_TIMESTAMP"])]
+    private ?\DateTimeImmutable $createdAt;
 
-    #[Column(type: 'datetime_immutable', nullable: false, options: ["default" => "CURRENT_TIMESTAMP"])]
-    private \DateTimeImmutable $updatedAt;
+    #[Column(type: 'datetime_immutable', nullable: true, options: ["default" => "CURRENT_TIMESTAMP"])]
+    private ?\DateTimeImmutable $updatedAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
     public function getId(): int
     {
@@ -69,18 +75,8 @@ final class Wiki
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
-
     public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

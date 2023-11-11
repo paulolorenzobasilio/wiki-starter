@@ -16,7 +16,7 @@ class WikiSeeder extends AbstractSeed
             $data[] =  [
                 'title' => $title,
                 'description' => $faker->unique()->realText,
-                'url' => "/{$slugify->slugify($title)}"
+                'url' => $slugify->slugify($title)
             ];
         }
 
