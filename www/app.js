@@ -21,7 +21,9 @@ function App(){
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        formData.description = editor.root.innerHTML
+        if(editor.getText().trim()){
+            formData.description = editor.root.innerHTML
+        }
         try {
             const response = await axios({
                 method: 'post',
@@ -35,10 +37,13 @@ function App(){
             alert('Success')
             clearFormData()
         } catch (error){
-            alert('Error')
-            console.error("Error:", error)
+            const response = error.response
+            if(response.status === 400){
+                for (const [key, value] of Object.entries(response.data)){
+                    alert(value);
+                }
+            }
         }
-
     }
     return (
         <div className={"container"}>
@@ -48,7 +53,8 @@ function App(){
                     <input id="title" type="text" className="form-control"
                            placeholder="Enter wiki title..."
                            value={formData.title}
-                           onChange={handleChange}/>
+                           onChange={handleChange}
+                           required/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Description</label>
