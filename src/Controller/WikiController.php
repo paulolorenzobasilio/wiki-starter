@@ -24,8 +24,7 @@ class WikiController
 
         $response->getBody()->write($data);
 
-        return $response
-            ->withHeader('Content-Type', 'application/json');
+        return $response;
     }
 
     /**
@@ -40,6 +39,9 @@ class WikiController
         $wiki->setTitle($body['title']);
         $wiki->setDescription($body['description']);
         $wiki->setUrl($body['title']);
+
+        $data = $this->serializer->serialize($wiki, 'json');
+        $response->getBody()->write($data);
 
         $this->em->persist($wiki);
         $this->em->flush();
