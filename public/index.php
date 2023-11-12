@@ -34,9 +34,12 @@ $app->add(function ($request, $handler) {
 
 $app->add(new WhoopsMiddleware([], [new JsonResponseHandler()]));
 
-
 $app->get('/', WikiController::class . ':get');
 $app->post('/', WikiController::class . ':post')->add(new WikiValidatorMiddleware());
+
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
 
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function ($request, $response) {
     throw new HttpNotFoundException($request);

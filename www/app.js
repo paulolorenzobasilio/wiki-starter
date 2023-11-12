@@ -3,32 +3,36 @@ import ReactDOM from 'react-dom'
 import axios from "axios";
 
 function App(){
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         title: "",
         description: ""
-    })
+    }
+    const [formData, setFormData] = useState(initialFormData)
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     };
+
+    const clearFormData = () => {
+        setFormData({...initialFormData})
+        editor.root.innerHTML = ''
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         formData.description = editor.root.innerHTML
         try {
-            const bodyFormData = new FormData();
-            bodyFormData.append('title', formData.title)
-            bodyFormData.append('description', formData.description)
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:8000',
-                data: bodyFormData,
+                url: 'http://127.0.0.1:8000',
+                data: formData,
                 headers: {
                     'Content-Type': `multipart/form-data`
                 }
             })
             console.log('Success', response.data)
             alert('Success')
+            clearFormData()
         } catch (error){
             alert('Error')
             console.error("Error:", error)
