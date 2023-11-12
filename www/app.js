@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom'
 import axios from "axios";
+import Index from "./Index";
 
 function App(){
     const initialFormData = {
@@ -55,6 +56,7 @@ function App(){
                 </div>
                 <button className={"btn btn-primary"} type={"submit"}>Submit</button>
             </form>
+            <Index/>
         </div>
     );
 }

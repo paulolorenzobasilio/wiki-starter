@@ -29,15 +29,17 @@ $app->add(function ($request, $handler) {
     return $response
         ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+        ->withHeader('Content-type', 'application/json');
 });
 
 $app->add(new WhoopsMiddleware([], [new JsonResponseHandler()]));
 
 $app->get('/', WikiController::class . ':get');
 $app->post('/', WikiController::class . ':post')->add(new WikiValidatorMiddleware());
+$app->delete('/{id}', WikiController::class . ':delete');
 
-$app->options('/{routes:.+}', function ($request, $response, $args) {
+$app->options('/{routes:.+}', function ($request, $response) {
     return $response;
 });
 

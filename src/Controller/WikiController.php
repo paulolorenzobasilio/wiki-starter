@@ -44,7 +44,15 @@ class WikiController
         $this->em->persist($wiki);
         $this->em->flush();
 
-        return $response->withStatus(201, 'Created')
-            ->withHeader('Content-type', 'application/json');
+        return $response->withStatus(201, 'Created');
+    }
+
+    public function delete(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $this->em->createQuery('DELETE FROM App\Entity\Wiki w WHERE w.id = :id')
+            ->setParameter('id',  $request->getAttribute('id'))
+            ->execute();
+
+        return $response->withStatus(204);
     }
 }
